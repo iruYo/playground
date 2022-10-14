@@ -50,11 +50,37 @@ function missingLetter(input) {
     Object.entries(alphabet).some(([key, value]) => {
         if (value) {
             missing = key
+            return missing
         }
     })
-    
-    return missing;
+
+    return missing
 }
 
 var missingLetterTest = missingLetter("the quick brown box jumps over a lazy dog")
 
+function firstNonDuplicate(input) {
+    var frequencies = new Map();
+
+    [...input].forEach(char => {
+        var count = frequencies.get(char)
+        if (count) {
+            frequencies.set(char, count + 1)
+        } else {
+            frequencies.set(char, 1)
+        }
+    });
+
+    var firstNonDuplicateChar = ""
+    _ = [...input].some(char => {
+        var freq = frequencies.get(char)
+        if (freq === 1) {
+            firstNonDuplicateChar = char
+            return char     
+        }
+    })
+
+    return firstNonDuplicateChar
+}
+
+var firstNonDuplicateTest = firstNonDuplicate("minimum")
