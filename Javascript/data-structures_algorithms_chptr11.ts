@@ -44,7 +44,7 @@ function indexOfX(text: string, count: number = 0): number {
 
 indexOfX("abcdefghijkxlmnopxqrstuvwyz")
 
-function shortestPath(x: number, y: number, count: number = 0): number {
+function shortestPath(x: number, y: number): number {
     if (x === 0 || y === 0)
         return 0
     if (x === 1 || y === 1)
