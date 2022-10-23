@@ -44,13 +44,13 @@ function indexOfX(text: string, count: number = 0): number {
 
 indexOfX("abcdefghijkxlmnopxqrstuvwyz")
 
-function shortestPath(x: number, y: number): number {
-    if (x === 0 || y === 0)
+function shortestPaths(x: number, y: number): number {
+    if (x <= 0 || y <= 0)
         return 0
     if (x === 1 || y === 1)
         return 1
 
-    return shortestPath(x - 1, y) + shortestPath(x, y - 1)
+    return shortestPaths(x - 1, y) + shortestPaths(x, y - 1)
 }
 
-shortestPath(9, 3)
+shortestPaths(9, 3)
