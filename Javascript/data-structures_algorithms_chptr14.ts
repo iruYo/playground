@@ -1,9 +1,27 @@
-class listNode {
+class LinkedListNode {
     data
     nextNode
     constructor(data) {
         this.data = data
         this.nextNode = null
+    }
+}
+
+class DoublyLinkedListNode {
+    data
+    nextNode
+    constructor(data) {
+        this.data = data
+        this.nextNode = null
+    }
+}
+
+class DoublyLinkedList {
+    firstNode
+    lastNode
+    constructor() {
+        this.firstNode = null
+        this.lastNode = null
     }
 }
 
@@ -48,27 +66,56 @@ class LinkedList {
     }
 
     search = function (value) {
+        let current = this.firstNode
 
+        while (current) {
+            if (current.data === value)
+                return current
+
+            current = current.nextNode
+        }
+
+        return null
     }
 
     delete = function (index) {
+        let current = this.firstNode
+        if (index < 0)
+            return
 
+        if (index === 0)
+            this.firstNode = current.nextNode
+
+        // Index - 1 one to get node right before node that is to be deleted.
+        for (let i = 0; i < (index - 1); i++) {
+            if (current.nextNode)
+                current = current.nextNode
+            else
+                return
+        }
+
+        // last node in list edge case
+        if(current.nextNode)
+            current.nextNode = current.nextNode.nextNode
     }
 }
 
-var node1 = new listNode("test1")
-var node2 = new listNode("test2")
-var node3 = new listNode("test3")
-
 var myList = new LinkedList()
-myList.add(node1)
-myList.add(node2)
-myList.add(node3)
+myList.add(new LinkedListNode("test1"))
+myList.add(new LinkedListNode("test2"))
+myList.add(new LinkedListNode("test3"))
 
 console.log(myList.read(0)) // test1
-console.log(myList.read(1)) // test2
-console.log(myList.read(2)) // test3
-console.log(myList.read(3)) // null
+console.log(myList.read(3)) // test2
 console.log(myList.read(4)) // null
+console.log(myList.search("test2")) // LinkedListNode (data: "test2")
+console.log(myList.search("test4")) // null
 
 myList.printNodes()
+myList.delete(3)
+myList.printNodes()
+
+var myDoubleList = new DoublyLinkedList()
+// myDoubleList.add(new LinkedListNode("doubleTest1"))
+// myDoubleList.add(new LinkedListNode("doubleTest2"))
+// myDoubleList.add(new LinkedListNode("doubleTest3"))
