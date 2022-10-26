@@ -10,6 +10,7 @@ class LinkedListNode {
 class DoublyLinkedListNode {
     data
     nextNode
+    previousNode
     constructor(data) {
         this.data = data
         this.nextNode = null
@@ -23,6 +24,44 @@ class DoublyLinkedList {
         this.firstNode = null
         this.lastNode = null
     }
+
+    add = function (value) {
+        let node = new DoublyLinkedListNode(value)
+
+        if (this.firstNode === null) {
+            this.firstNode = node
+            this.lastNode = node
+        }
+        else {
+            // Setup new node's previous node with last node in list
+            node.previousNode = this.lastNode
+            // Set list's current last node's nextNode to new node
+            this.lastNode.nextNode = node
+            // Set list's last node to new node
+            this.lastNode = node
+        }
+    }
+
+    read = function (index) {
+
+    }
+
+    printNodesReverse = function () {
+        let current = this.lastNode
+
+        while (current) {
+            console.log(current.data)
+            current = current.previousNode
+        }
+    }
+
+    search = function (value) {
+
+    }
+
+    delete = function (index) {
+
+    }
 }
 
 class LinkedList {
@@ -31,7 +70,9 @@ class LinkedList {
         this.firstNode = null
     }
 
-    add = function (node) {
+    add = function (value) {
+        let node = new LinkedListNode(value)
+
         if (this.firstNode === null) {
             this.firstNode = node
         } else {
@@ -95,19 +136,19 @@ class LinkedList {
         }
 
         // last node in list edge case
-        if(current.nextNode)
+        if (current.nextNode)
             current.nextNode = current.nextNode.nextNode
     }
 }
 
 var myList = new LinkedList()
-myList.add(new LinkedListNode("test1"))
-myList.add(new LinkedListNode("test2"))
-myList.add(new LinkedListNode("test3"))
+myList.add("test1")
+myList.add("test2")
+myList.add("test3")
 
 console.log(myList.read(0)) // test1
-console.log(myList.read(3)) // test2
-console.log(myList.read(4)) // null
+console.log(myList.read(2)) // test3
+console.log(myList.read(3)) // null
 console.log(myList.search("test2")) // LinkedListNode (data: "test2")
 console.log(myList.search("test4")) // null
 
@@ -116,6 +157,8 @@ myList.delete(3)
 myList.printNodes()
 
 var myDoubleList = new DoublyLinkedList()
-// myDoubleList.add(new LinkedListNode("doubleTest1"))
-// myDoubleList.add(new LinkedListNode("doubleTest2"))
-// myDoubleList.add(new LinkedListNode("doubleTest3"))
+myDoubleList.add("doubleTest1")
+myDoubleList.add("doubleTest2")
+myDoubleList.add("doubleTest3")
+
+myDoubleList.printNodesReverse()
